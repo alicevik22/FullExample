@@ -46,6 +46,10 @@ namespace _23_regular_expressions {
             Console.WriteLine(cleanString);
             Console.WriteLine("---------");
             //------------------------------------
+            // прочее:
+            //заменяем "-" на " "
+            text = Regex.Replace(text, "([-]+)", " ");
+            //------------------------------------
             Console.ReadKey();
         }
     }

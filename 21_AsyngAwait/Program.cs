@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace _21_AsyngAwait {
@@ -12,10 +13,14 @@ namespace _21_AsyngAwait {
             StartAsyng();
             Console.WriteLine("---------");
             StartBackgroundWorker();
-            //Console.WriteLine("---------");
+            Console.WriteLine("---------");
+
+            TestToken();
             Console.ReadKey();
         }
-        //---------
+
+        // ---------
+        // запуск асинхронной задачи
         private static async void StartAsyng() {
             Console.WriteLine("start async");
             await Task.Run(() => TaskRun());
@@ -28,7 +33,8 @@ namespace _21_AsyngAwait {
                 Console.WriteLine("T1 " + i);
             }
         }
-        //---------
+        // ---------
+        // еще вариант запуска задачи
         private static void StartBackgroundWorker() {
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += (o, e) => TaskRun2(1);
@@ -41,15 +47,37 @@ namespace _21_AsyngAwait {
             }
         }
         //---------
+        // Выходим из асинхронной задачи по токину
+        static CancellationTokenSource cts = new CancellationTokenSource();//отмена потока
+        static int cnt = 0;
 
+        private static void TestToken() {
+            CancellationToken ct = cts.Token;// сигнал на отмену
+            Task task = new Task(() => { ProcessRunLine(); }, cts.Token);
+            task.Start();
+        }
+        private static void ProcessRunLine() {
+            while (true) {
+                if (cts.IsCancellationRequested) { // проверяем наличие сигнала отмены задачи
+                    return;
+                }
+                Task.Delay(1000).Wait();
+                Console.WriteLine(cnt++);
+                if (cnt > 5)// отключаем в любом месте
+                    cts.Cancel();
+            }
+        }
+        //---------
+        // так же можно жостко выйти из задачи используя исключение и др
+        //https://metanit.com/sharp/tutorial/12.5.php
 
         //=============    параллельное выполнение !!!
         void parallel() {
             List<string> list = new List<string> {
                 "1.txt","2.txt","3.txt"
-        };
+            };
             list.AsParallel().ForAll(x => {
-                File.Delete(x); ///удаляем все из листа
+                File.Delete(x); ///удаляем все файлы из List
             });
 
         }

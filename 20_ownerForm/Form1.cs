@@ -19,9 +19,24 @@ namespace ownerForm {
         //https://codernotes.ru/articles/c-c/upravlenie-odnoj-formoj-iz-drugoj.html
 
         private void button1_Click(object sender, EventArgs e) {
-            new Form2(this).Show();
+            if (Application.OpenForms["Form2"] == null) // если форма не открыта
+                new Form2(this).Show();
             this.button1.Text = "form2";
             this.label1.Text = "form2";
         }
+
+
+        // использование элемента в другом потоке
+
+        //on WinForm
+        //progressBar1.Invoke(new Action(() => 
+        //{ 
+        //    progressBar1.Value = (((double)progress / progressTotal) * 100)+1;
+        //}));
+
+        //on WPF
+        //this.Dispatcher.Invoke((Action)(() => {
+        //    progressBar1.Value = progress + 1;
+        //}));
     }
 }

@@ -7,7 +7,7 @@ using System.ComponentModel;
 //using System.ComponentModel.DataAnnotations;
 
 namespace _18_models {
-    class models {
+    public class models {
         // пример
         // https://metanit.com/sharp/aspnetmvc/9.6.php
         //[Key]

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace _18_models {
     class Program {
         static void Main(string[] args) {
+            models m = new models();
         }
     }
 }

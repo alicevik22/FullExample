@@ -24,7 +24,7 @@ namespace _1_types {
 
             //=========  String
             _str = _str.Replace("Е", "А");// Е меняет на А
-            if (_str.Contains("A")) {} // если есть в слове
+            if (_str.Contains("A")) { } // если есть в слове
             _str = _str.Remove(1, 2);// от 1й удили 2 буквы
             _str = _str.Trim(); // удалить пробелы и др
             _str = _str.ToLower(); // в нижний регистр
@@ -32,8 +32,7 @@ namespace _1_types {
 
             //=========  парсинг с разделителем в doble
             string str = "5.9";
-            NumberFormatInfo numberFormatInfo = new NumberFormatInfo()
-            {
+            NumberFormatInfo numberFormatInfo = new NumberFormatInfo() {
                 NumberDecimalSeparator = "."
             };
             double a = double.Parse(str, numberFormatInfo);
@@ -46,6 +45,8 @@ namespace _1_types {
             string hexValue = _int.ToString("X");
             //hex to decimal
             int decValue = int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);
+            //string hex to byte[]
+            data = StringToByteArray("FFFA");
 
             //=========  Array
             int[] MyArray = new int[10];
@@ -85,7 +86,7 @@ namespace _1_types {
             newlist = list.OrderBy(x => x);//сортировка
 
             //показать дубликат
-            newlist = list.GroupBy(x => x).Where(x => x.Count()>1).Select(x => x.Key);
+            newlist = list.GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key);
 
 
 
@@ -93,7 +94,7 @@ namespace _1_types {
             Console.WriteLine(_str);
 
 
-             //=========  BindingList
+            //=========  BindingList
             /*public BindingList<findOnIdModels> idDataList = new BindingList<findOnIdModels>() { 
                 new findOnIdModels(){id = "103C940", numStart = 15},
                 new findOnIdModels(){id = "904201F", numStart = 15},
@@ -108,10 +109,17 @@ namespace _1_types {
         }
         //=========  ссылки
         //ref ввод данных по ссылке
-        void F(ref int width){}
+        void F(ref int width) { }
         //out вывод данных по ссылке
-        void FF(out int width){width = 0;}
+        void FF(out int width) { width = 0; }
         //in параметр передается по ссылке но не может быть изменен
         //void FFF(in int width){}
+
+        public static byte[] StringToByteArray(string hex) {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
     }
 }

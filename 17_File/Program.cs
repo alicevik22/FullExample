@@ -22,10 +22,13 @@ namespace _17_File {
                 }
             }
             //========= Чтение
+            using (StreamReader sr = new StreamReader(path, true)) {
+                while (!sr.EndOfStream) {
+                    string line = sr.ReadLine();
+                }
+            }
 
-
-
-            // не испоьзовать
+            // не испоьзовать File
             //========= Чтение всего текста
             string linee = File.ReadAllText(@"C:\1.txt");
 
@@ -36,6 +39,7 @@ namespace _17_File {
             }
             //========= Delete exepption не вызывает
             File.Delete(path);
+            // в 21м примере есть параллельное удаление нескольких файлов
             File.Copy(path, path.Replace(path, "new.txt"), true);
             File.Move(path, path.Replace(path, "new.txt"));
 
