@@ -30,6 +30,9 @@ namespace _1_types {
             _str = _str.ToLower(); // в нижний регистр
             _str = _str.ToUpper(); // в верхний регистр
 
+            if (!String.IsNullOrEmpty(textBox1.Text)){}// проверка на null
+
+
             //=========  парсинг с разделителем в doble
             string str = "5.9";
             NumberFormatInfo numberFormatInfo = new NumberFormatInfo() {

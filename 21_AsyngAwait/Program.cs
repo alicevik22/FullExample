@@ -29,7 +29,7 @@ namespace _21_AsyngAwait {
         }
         private static void TaskRun() {
             for (int i = 5; i >= 0; i--) {
-                Task.Delay(300);
+                Task.Delay(300).Wait();
                 Console.WriteLine("T1 " + i);
             }
         }
@@ -42,7 +42,7 @@ namespace _21_AsyngAwait {
         }
         private static void TaskRun2(int times) {
             for (int i = 5; i >= 0; i--) {
-                Task.Delay(300);
+                Task.Delay(300).Wait();
                 Console.WriteLine("T2 " + i);
             }
         }

@@ -1,1 +1,0 @@
-D:\46013\VS\C#\example\fullExample\18_models\bin\Debug\18_models.exe.config

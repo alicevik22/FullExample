@@ -8,11 +8,22 @@ using System.ComponentModel;
 
 namespace _18_models {
     public class models {
+
         // пример
         // https://metanit.com/sharp/aspnetmvc/9.6.php
         //[Key]
         public int? userId { get; set; }
         //public int name { get; set; } = null!;
         //public int status { get; set; } = 0;
+
+
+        //свойства Properties
+        private int _value;
+        public int Value {
+            get { return _value; }
+            set { _value = value; }
+        }
+        //prop
+        //propfull
     }
 }
